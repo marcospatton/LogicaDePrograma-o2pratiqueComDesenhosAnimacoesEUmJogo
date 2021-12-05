@@ -1,8 +1,8 @@
 <canvas width="600" height="400"></canvas>
-<br>
-Escolha uma cor <input type="color">
+selecione a cor <input type="color">
 
 <script>
+    var paleta = document.querySelector('input');
     var tela = document.querySelector('canvas');
     var pincel = tela.getContext('2d');
 
@@ -16,7 +16,7 @@ Escolha uma cor <input type="color">
         if(desenha) {
             var x = evento.pageX - tela.offsetLeft;
             var y = evento.pageY - tela.offsetTop;
-            pincel.fillStyle = 'blue';
+            pincel.fillStyle = paleta.value; // sempre pega o valor atual da paleta!
             pincel.beginPath();
             pincel.arc(x, y, 10, 0, 2 * 3.14);
             pincel.fill();
@@ -26,18 +26,16 @@ Escolha uma cor <input type="color">
 
     tela.onmousemove = desenhaCirculo;
 
-    function habilitaDesenhar() {
+    // atribuindo diretamente a função anônima
+    tela.onmousedown = function() {
 
         desenha = true;
     }
 
-    function desabilitaDesenhar() {
+    // atribuindo diretamente a função anônima
+     tela.onmouseup = function() {
 
         desenha = false;
     }
-
-    tela.onmousedown = habilitaDesenhar;
-
-    tela.onmouseup = desabilitaDesenhar;
 
 </script>
